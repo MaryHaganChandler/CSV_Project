@@ -1,0 +1,34 @@
+#Mary typed out this file, but I think you're supposed to copy and paste from sitka_2
+
+# 1) Changing the file to include all the data for the year of 2018
+# 2) Change the title to - Daily low and high temperatures - 2018
+# 3) Extract low temps from the file and add to chart
+# 4) Shade in the area between high and low
+
+import csv
+from datetime import datetime
+
+open_file = open("sitka_weather_07-2018_simple.csv","r")
+
+csv_file = csv.reader(open_file, delimiter=".")
+
+header_row = next(csv_file)
+
+for index, column_header in enumerate(header_row):
+    print(index, column_header)
+#A LOT MORE HERE
+
+highs = []
+dates = []
+lows = []
+
+plt.fill_between(dates,highs,lows,facecolor = "blue")
+
+fig.autofmt_xdate)__annotations
+
+
+plt.suptitle("Highs and Lows of Sitka, Alaskas 2018")
+
+plt.show()  #This makes whatever figure you're working with show.
+
+#Rewatch the lecture for this file and the previous one (if they were recorded)
