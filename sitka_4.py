@@ -1,12 +1,6 @@
-# Copied sitka_2 to start sitka_3
+#Copied sitka_3 to start sitka_4
 
-#Objectives for sitka_3
-# 1) Changing the file to include all the data for the year of 2018
-# 2) Changing the title to Daily high and low temperatures - 2018
-# 3) Extracting the low temperatures from the file and adding to the chart
-# 4) Shading in the area between high and low
-
-
+#Using the death_valley csv file instead of sitka file
 
 import csv
 from datetime import datetime
@@ -39,12 +33,15 @@ for row in csv_file:
         low = int(row[5])
         
     except ValueError:
-        print(f"Missing data for {current_date}")
+        print(f"Missing data for {current_date}")  
+            #This is a new way to print something out where you don't need
+            #   to have more quotes and commas, and you can use quotes inside
+            #   it. You put any variables in curly brackets.
 
     else:    
         highs.append(high)
         lows.append(low)
-        dates.append(current_date)      #Can do this line and above in one line
+        dates.append(current_date)
 
 #Print out the lists.
 print(highs)
@@ -77,84 +74,3 @@ plt.tick_params(axis = "both",which="major",labelsize=16)
 fig.autofmt_xdate()     #Makes the dates slanted so we can see the whole thing
 
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-
-#Supposed to copy and paste from sitka_3, but Mary typed it out
-
-import csv
-from datetime import datetime
-
-open_file = open("death_valley_2018_simple.csv","r")
-
-csv_file = csv.reader(open_file, delimiter = ",")
-
-header_row = next(csv_file)
-
-print(header_row)
-
-
-for index, column_header in enumerate(header_row):
-    print(index, column_header)
-
-
-highs = []
-dates = []
-lows = []
-
-for row in csv_file:
-
-    try:
-        current_date = datetime.strptime(row[2],"%Y-%m-%d")
-        high = int(row[4])
-        low = int(row[5])
-
-    except ValueError:
-        print(f"Missing data for {current_date}")   #This is a new way to print something
-                #out where you don't need to have more quotes and commas, and you can use
-                #quotes inside it. You put any variables in curly brackets.
-
-    else:
-        highs.append(high)
-        lows.append(low)
-        dates.append(current_date)
-
-
-print(highs)
-print(lows)
-
-import matplotlib.pyplot as plt
-
-fig = plt.figure()
-
-#More here
-
-
-"""
