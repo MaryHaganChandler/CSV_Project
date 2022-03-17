@@ -1,5 +1,10 @@
-#Import CSV module
+#Copied sitka_1 to start sitka_2
+#Using the datetime module
+#Adding dates to the x axis for the month of July 2018
+
+
 import csv
+from datetime import datetime
 
 #Create a file object.
 open_file = open("sitka_weather_07-2018_simple.csv","r")
@@ -10,37 +15,48 @@ csv_file = csv.reader(open_file, delimiter = ",")
 #Skip the first row.
 header_row = next(csv_file)
 
-#Determine what type the header row is.
-#print(type(header_row)) #Every row in this file will be a list.
 
 for index, column_header in enumerate(header_row):
-    #Enumerate() is a function in Python that will give us the index
-    #   location and the element in that location, so you have a
-    #   description of what your list looks like.
-    #You can use enumerate on any kind of list object.
     print(index, column_header)
 
 
-#Create an empty list.
 highs = []
+dates = []
+
+#EXAMPLE of how datetime works -- irrelevant
+#test_date = datetime.strptime("2018-01-01", "%Y-%m-%d")
+#print(test_date)
+
+
 
 #Extract all the max temperatures from the file and add them to the list.
 for row in csv_file:
     highs.append(int(row[5]))
+    current_date = datetime.strptime(row[2], "%Y-%m-%d")
+    dates.append(current_date)      #Can do this line and above in one line
 
-#Print out the list.
+#Print out the lists.
 print(highs)
+print(dates)
+
+
+
 
 import matplotlib.pyplot as plt #pyplot is usually referred to as plt
 
-plt.plot(highs, c = "red")
+fig = plt.figure()      #Created this so we can format the date better
+
+plt.plot(dates, highs, c = "red")
 
 plt.title("Daily high temperatures, July 2018",fontsize = 16)
-plt.xlabel("")
+plt.xlabel("Month of July 2018")
 plt.ylabel("Temperatures (F)",fontsize=16)
 
 plt.tick_params(axis = "both",which="major",labelsize=16)
     #Tick paramaters are the ticks that are on the graph, we want to show
     #   them on both the x and y axis, and we want to show the major tick
     #   marks.
+
+fig.autofmt_xdate()     #Makes the dates slanted so we can see the whole thing
+
 plt.show()
