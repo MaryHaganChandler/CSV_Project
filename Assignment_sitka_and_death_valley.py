@@ -3,7 +3,7 @@ from datetime import datetime
 
 from pyparsing import delimited_list
 
-#Create a file object.
+#Create file objects.
 open_sitka_file = open("sitka_weather_2018_simple.csv","r")
 open_death_valley_file = open("death_valley_2018_simple.csv","r")
 
@@ -14,11 +14,11 @@ dv_csv_file = csv.reader(open_death_valley_file, delimiter = ",")
 
 #Skip the first row of each file.
 sitka_header_row = next(sitka_csv_file)
-
 dv_header_row = next(dv_csv_file)
 
 
 
+"""
 for index, column_header in enumerate(sitka_header_row):
     if column_header == "NAME":
         next(sitka_csv_file)
@@ -28,8 +28,6 @@ for index, column_header in enumerate(sitka_header_row):
     print(index, column_header)
 
 
-
-"""
 for index, column_header in enumerate(dv_header_row):
     if column_header == "TMAX":
         dv_tmax = column_header
@@ -41,6 +39,8 @@ for index, column_header in enumerate(dv_header_row):
 
 """
 
+
+#Create variables for the TMAX, TMIN, and DATE indices.
 sitka_tmax_index = sitka_header_row.index("TMAX")
 sitka_tmin_index = sitka_header_row.index("TMIN")
 sitka_date_index = sitka_header_row.index("DATE")
@@ -52,6 +52,7 @@ dv_date_index = dv_header_row.index("DATE")
 #dv_name_index = dv_header_row.index("NAME")
 
 
+#Create lists for the highs, lows, dates, and station names for sitka and death valley.
 sitka_highs = []
 sitka_lows = []
 
@@ -104,16 +105,14 @@ plt.title("SITKA AIRPORT, AK US")
 #plt.title(sitka_station_name)
 plt.fill_between(sitka_dates, sitka_highs, sitka_lows, facecolor = "blue", alpha = 0.1)
 
-#Create the death_valley subplot.
+#Create the death valley subplot.
 plt.subplot(2, 1, 2)
 plt.plot(dv_dates, dv_highs, c = "red")
 plt.plot(dv_dates, dv_lows, c = "blue")
 plt.title("DEATH VALLEY, CA US")
 #plt.title(dv_station_name)
 plt.fill_between(dv_dates, dv_highs, dv_lows, facecolor = "blue", alpha = 0.1)
-    #Give this function one x and two y's
-    #Alpha is the transparency; alpha ranges from 1 to 0, where 0 is
-    #   the most transparent and 1 is not transparent
+
 
 #Display the suptitle.
 plt.suptitle("Temperature comparison between SITKA AIRPORT, AK US and DEATH VALLEY, CA US")
