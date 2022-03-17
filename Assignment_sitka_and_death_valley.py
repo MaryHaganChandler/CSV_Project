@@ -40,6 +40,15 @@ for index, column_header in enumerate(dv_header_row):
         next(dv_csv_file)
         dv_station_name = column_header
 
+sitka_tmax_index = sitka_header_row.index("TMAX")
+sitka_tmin_index = sitka_header_row.index("TMIN")
+sitka_date_index = sitka_header_row.index("DATE")
+sitka_station_name = sitka_header_row.index("NAME")
+
+dv_tmax_index = dv_header_row.index("TMAX")
+dv_tmin_index = dv_header_row.index("TMIN")
+dv_date_index = dv_header_row.index("DATE")
+dv_station_name = dv_header_row.index("NAME")
 
 
 sitka_highs = []
@@ -53,9 +62,9 @@ dv_dates = []
 
 #Extract all the high and low temps from the sitka file and add them to the list.
 for row in sitka_csv_file:
-    sitka_highs.append(int(row[5]))
-    sitka_lows.append(int(row[6]))
-    current_date = datetime.strptime(row[2], "%Y-%m-%d")
+    sitka_highs.append(int(row[sitka_tmax_index]))
+    sitka_lows.append(int(row[sitka_tmin_index]))
+    current_date = datetime.strptime(row[sitka_date_index], "%Y-%m-%d")
     sitka_dates.append(current_date)
 
 
@@ -63,9 +72,9 @@ for row in sitka_csv_file:
 for row in dv_csv_file:
 
     try:
-        current_date = datetime.strptime(row[2], "%Y-%m-%d")
-        high = int(row[4])
-        low = int(row[5])
+        current_date = datetime.strptime(row[dv_date_index], "%Y-%m-%d")
+        high = int(row[dv_tmax_index])
+        low = int(row[dv_tmin_index])
         
     except ValueError:
         print(f"Missing data for {current_date}")  
